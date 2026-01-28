@@ -1,0 +1,17 @@
+<div class="chart-container">
+  <h3 *ngIf="title">{{ title }}</h3>
+  
+  <div class="chart-wrapper" *ngIf="!loading && data.length > 0">
+    <canvas baseChart
+      [type]="lineChartType"
+      [data]="lineChartData"
+      [options]="lineChartOptions">
+    </canvas>
+  </div>
+  
+  <div class="skeleton" *ngIf="loading"></div>
+  
+  <div class="no-data" *ngIf="!loading && data.length === 0">
+    <p>No data available</p>
+  </div>
+</div>

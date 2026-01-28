@@ -1,0 +1,15 @@
+<div class="alert-badge" [class]="severityClass" [class.compact]="compact">
+  <div class="alert-header">
+    <span class="severity-icon">{{ severityIcon }}</span>
+    <span class="alert-title">{{ alert.message }}</span>
+    <span class="alert-timestamp">{{ formatDate(alert.detectedAt) }}</span>
+  </div>
+  
+  <div class="alert-description" *ngIf="!compact">
+    {{ alert.recommendedAction }}
+  </div>
+  
+  <div class="alert-type" *ngIf="!compact">
+  <span class="type-badge">{{ formatAlertType(alert.alertType) }}</span>
+  </div>
+</div>

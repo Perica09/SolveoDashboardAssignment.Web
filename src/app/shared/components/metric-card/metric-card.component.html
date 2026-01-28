@@ -1,0 +1,22 @@
+<mat-card [class.alert]="alert" [class.loading]="loading">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+      <span>{{ title }}</span>
+    </mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <div class="metric-value" *ngIf="!loading">
+      {{ formattedValue }}
+      <mat-icon *ngIf="trend" [class]="trend">{{ trendIcon }}</mat-icon>
+    </div>
+    
+    <div class="skeleton" *ngIf="loading"></div>
+    
+    <div class="growth" *ngIf="growth !== undefined && !loading" [class]="growthClass">
+      <span>{{ growth >= 0 ? '+' : '' }}{{ growth | number:'1.2-2' }}%</span>
+      <span class="growth-label">vs last month</span>
+    </div>
+  </mat-card-content>
+</mat-card>

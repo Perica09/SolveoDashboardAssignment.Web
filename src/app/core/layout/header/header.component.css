@@ -1,0 +1,237 @@
+/* ============================================
+   HEADER COMPONENT
+   ============================================ */
+
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background-color: rgba(37, 39, 64, 0.8);
+  backdrop-filter: blur(var(--blur-lg));
+  border-bottom: 1px solid var(--border-primary);
+  box-shadow: var(--shadow-md);
+  z-index: var(--z-sticky);
+  transition: var(--transition-all);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 var(--spacing-6);
+  max-width: 100%;
+  gap: var(--spacing-4);
+}
+
+/* ==========================================
+   LOGO SECTION
+   ========================================== */
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  cursor: pointer;
+  transition: var(--transition-transform);
+  flex-shrink: 0;
+}
+
+.header-logo:hover {
+  transform: scale(1.02);
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+/* ==========================================
+   SEARCH BAR
+   ========================================== */
+
+.header-search {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-icon {
+  position: absolute;
+  left: var(--spacing-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4) var(--spacing-3) var(--spacing-12);
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  transition: var(--transition-all);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-purple);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+  background-color: var(--bg-secondary);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ==========================================
+   NAVIGATION TABS
+   ========================================== */
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-shrink: 0;
+}
+
+.nav-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-3) var(--spacing-5);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-base);
+  transition: var(--transition-all);
+  cursor: pointer;
+}
+
+.nav-tab:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+  transform: translateY(-1px);
+}
+
+.nav-tab.active {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+}
+
+.nav-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  box-shadow: var(--shadow-glow-purple);
+  border-radius: var(--radius-full) var(--radius-full) 0 0;
+  animation: slideIn 0.3s ease;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 1200px) {
+  .header-search {
+    max-width: 300px;
+  }
+  
+  .nav-tab {
+    padding: var(--spacing-3) var(--spacing-4);
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 1024px) {
+  .header-container {
+    gap: var(--spacing-4);
+  }
+  
+  .header-search {
+    max-width: 250px;
+  }
+  
+  .nav-tab {
+    padding: var(--spacing-2) var(--spacing-3);
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 var(--spacing-4);
+    gap: var(--spacing-3);
+  }
+  
+  .logo-text {
+    display: none;
+  }
+  
+  .header-search {
+    max-width: 200px;
+  }
+  
+  .header-nav {
+    gap: var(--spacing-1);
+  }
+  
+  .nav-tab {
+    padding: var(--spacing-2);
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-search {
+    display: none;
+  }
+  
+  .nav-tab {
+    padding: var(--spacing-2) var(--spacing-3);
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-tab span {
+    display: none;
+  }
+  
+  .nav-tab {
+    padding: var(--spacing-2);
+    min-width: 40px;
+    justify-content: center;
+  }
+}
+
+/* ==========================================
+   ANIMATIONS
+   ========================================== */
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}

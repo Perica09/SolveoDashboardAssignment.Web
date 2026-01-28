@@ -1,0 +1,185 @@
+/* ============================================
+   METRIC CARD COMPONENT
+   ============================================ */
+
+mat-card {
+  height: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-5);
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition-all);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+mat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--border-secondary);
+}
+
+mat-card.alert {
+  border-left: 4px solid var(--color-error);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(239, 68, 68, 0.05) 100%);
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+mat-card-header {
+  margin-bottom: var(--spacing-4);
+}
+
+mat-card-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.5px;
+}
+
+mat-card-title mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+}
+
+/* ==========================================
+   METRIC VALUE
+   ========================================== */
+
+.metric-value {
+  font-size: 48px;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
+  line-height: 1;
+}
+
+.metric-value mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.metric-value mat-icon.up {
+  color: var(--color-success);
+}
+
+.metric-value mat-icon.down {
+  color: var(--color-error);
+}
+
+/* ==========================================
+   GROWTH BADGE
+   ========================================== */
+
+.growth {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--spacing-4) var(--spacing-6);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  width: fit-content;
+  box-shadow: var(--shadow-md);
+}
+
+.growth.positive {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(34, 211, 238, 0.2) 100%);
+  color: var(--color-success);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.growth.negative {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(251, 146, 60, 0.2) 100%);
+  color: var(--color-error);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.growth-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  opacity: 0.8;
+}
+
+/* ==========================================
+   LOADING STATE
+   ========================================== */
+
+.skeleton {
+  height: 48px;
+  background: linear-gradient(
+    90deg,
+    var(--bg-tertiary) 25%,
+    var(--bg-hover) 50%,
+    var(--bg-tertiary) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: var(--radius-base);
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ==========================================
+   CARD ENTRY ANIMATION
+   ========================================== */
+
+mat-card {
+  animation: fadeInUp 0.5s ease backwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 768px) {
+  .metric-value {
+    font-size: 36px;
+  }
+
+  mat-card {
+    padding: var(--spacing-5);
+  }
+}
+
+@media (max-width: 480px) {
+  .metric-value {
+    font-size: 28px;
+  }
+
+  mat-card {
+    padding: var(--spacing-4);
+  }
+}

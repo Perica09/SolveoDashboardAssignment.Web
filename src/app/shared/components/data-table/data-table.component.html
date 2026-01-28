@@ -1,0 +1,31 @@
+<div class="table-container">
+  <h3 *ngIf="title">{{ title }}</h3>
+  
+  <div class="table-wrapper" *ngIf="!loading && data.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns" 
+              [class.sortable]="column.sortable"
+              (click)="sort(column)">
+            {{ column.label }}
+            <span class="sort-icon" *ngIf="column.sortable">{{ getSortIcon(column) }}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of displayData">
+          <td *ngFor="let column of columns">
+            {{ formatValue(row[column.key], column) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="skeleton" *ngIf="loading"></div>
+  
+  <div class="no-data" *ngIf="!loading && data.length === 0">
+    <p>No data available</p>
+  </div>
+</div>

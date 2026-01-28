@@ -1,0 +1,510 @@
+/* ============================================
+   REGIONS COMPONENT
+   ============================================ */
+
+.regions-container {
+  padding: var(--spacing-6);
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+.header {
+  text-align: center;
+  padding: 0 0 var(--spacing-4) 0;
+  margin-bottom: var(--spacing-6);
+  position: relative;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+}
+
+.header h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: var(--spacing-4) 0 0 0;
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================
+   LOADING STATE
+   ========================================== */
+
+.loading-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-16);
+  gap: var(--spacing-4);
+}
+
+.loading-overlay p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+}
+
+/* ==========================================
+   ERROR STATE
+   ========================================== */
+
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-16);
+  gap: var(--spacing-4);
+  text-align: center;
+}
+
+.error-state mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: var(--color-error);
+}
+
+.error-state p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+  max-width: 500px;
+}
+
+/* ==========================================
+   CONTENT
+   ========================================== */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.content.hidden {
+  display: none;
+}
+
+/* ==========================================
+   FILTERS SECTION
+   ========================================== */
+
+.filters-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  background: var(--bg-tertiary);
+  padding: var(--spacing-6);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--border-secondary);
+  box-shadow: var(--shadow-lg);
+}
+
+.search-field {
+  width: 100%;
+}
+
+/* Make Material form fields more visible */
+.filters-section ::ng-deep .mat-mdc-form-field {
+  --mdc-outlined-text-field-container-shape: 12px;
+}
+
+.filters-section ::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+}
+
+.filters-section ::ng-deep .mdc-notched-outline__leading,
+.filters-section ::ng-deep .mdc-notched-outline__notch,
+.filters-section ::ng-deep .mdc-notched-outline__trailing {
+  border-color: var(--border-secondary) !important;
+}
+
+.filters-section ::ng-deep .mat-mdc-form-field:hover .mdc-notched-outline__leading,
+.filters-section ::ng-deep .mat-mdc-form-field:hover .mdc-notched-outline__notch,
+.filters-section ::ng-deep .mat-mdc-form-field:hover .mdc-notched-outline__trailing {
+  border-color: var(--color-purple) !important;
+}
+
+.filters-section ::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__leading,
+.filters-section ::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__notch,
+.filters-section ::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: var(--color-purple) !important;
+  border-width: 2px !important;
+}
+
+.filters-section ::ng-deep .mat-mdc-input-element,
+.filters-section ::ng-deep .mat-mdc-select-value {
+  color: var(--text-primary) !important;
+}
+
+.filters-section ::ng-deep .mat-mdc-floating-label {
+  color: var(--text-secondary) !important;
+}
+
+.filters-section ::ng-deep .mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
+  color: var(--color-purple) !important;
+}
+
+.filters-section ::ng-deep .mat-icon {
+  color: var(--color-purple) !important;
+}
+
+.filter-controls {
+  display: flex;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-controls mat-form-field {
+  flex: 1;
+  min-width: 200px;
+}
+
+.reset-button {
+  height: 56px;
+  border-color: var(--border-secondary) !important;
+  color: var(--text-primary) !important;
+  font-weight: var(--font-weight-medium);
+}
+
+.reset-button:hover {
+  background-color: var(--bg-hover) !important;
+  border-color: var(--color-purple) !important;
+}
+
+/* ==========================================
+   RESULTS INFO
+   ========================================== */
+
+.results-info {
+  padding: var(--spacing-2) 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.results-info p {
+  margin: 0;
+}
+
+/* ==========================================
+   TABLE CONTAINER
+   ========================================== */
+
+.table-container {
+  overflow-x: auto;
+  overflow-y: auto;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ==========================================
+   TABLE STYLES
+   ========================================== */
+
+.regions-table {
+  width: 100%;
+  background: var(--bg-secondary);
+}
+
+.regions-table th {
+  background: var(--bg-tertiary);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.regions-table td {
+  color: var(--text-secondary);
+}
+
+.table-row {
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+
+.table-row:hover {
+  background-color: var(--bg-hover);
+}
+
+/* ==========================================
+   REGION CELL
+   ========================================== */
+
+.region-cell {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-purple);
+  max-width: 300px;
+}
+
+.region-cell strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==========================================
+   NO DATA STATE
+   ========================================== */
+
+.no-data-row {
+  height: 200px;
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-10);
+}
+
+.no-data mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: var(--text-muted);
+}
+
+.no-data p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+  margin: 0;
+}
+
+/* ==========================================
+   PAGINATOR
+   ========================================== */
+
+mat-paginator {
+  border-top: 2px solid var(--border-secondary);
+  background: var(--bg-tertiary);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* Make paginator text and controls more visible */
+mat-paginator ::ng-deep .mat-mdc-paginator-container {
+  padding: var(--spacing-4) var(--spacing-5);
+}
+
+mat-paginator ::ng-deep .mat-mdc-paginator-page-size-label,
+mat-paginator ::ng-deep .mat-mdc-paginator-range-label {
+  color: var(--text-primary) !important;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-base);
+}
+
+mat-paginator ::ng-deep .mat-mdc-select-value {
+  color: var(--text-primary) !important;
+  font-weight: var(--font-weight-medium);
+}
+
+/* Make arrow buttons more visible */
+mat-paginator ::ng-deep .mat-mdc-icon-button {
+  background-color: var(--bg-secondary) !important;
+  border: 2px solid var(--border-secondary) !important;
+  border-radius: var(--radius-base) !important;
+  transition: var(--transition-all);
+}
+
+mat-paginator ::ng-deep .mat-mdc-icon-button:hover:not([disabled]) {
+  background-color: var(--bg-hover) !important;
+  border-color: var(--color-purple) !important;
+  transform: scale(1.05);
+}
+
+mat-paginator ::ng-deep .mat-mdc-icon-button[disabled] {
+  background-color: var(--bg-primary) !important;
+  border-color: var(--border-primary) !important;
+  opacity: 0.5;
+}
+
+mat-paginator ::ng-deep .mat-mdc-icon-button[disabled] .mat-icon,
+mat-paginator ::ng-deep .mat-mdc-icon-button[disabled] mat-icon,
+mat-paginator ::ng-deep .mat-mdc-icon-button[disabled] svg {
+  color: var(--text-disabled) !important;
+  fill: var(--text-disabled) !important;
+}
+
+/* Force bright white arrows for enabled buttons */
+mat-paginator ::ng-deep .mat-mdc-icon-button:not([disabled]) .mat-icon,
+mat-paginator ::ng-deep .mat-mdc-icon-button:not([disabled]) mat-icon,
+mat-paginator ::ng-deep .mat-mdc-icon-button:not([disabled]) svg,
+mat-paginator ::ng-deep .mat-mdc-icon-button:not([disabled]) svg path {
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
+  font-size: 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  opacity: 1 !important;
+}
+
+mat-paginator ::ng-deep .mat-mdc-paginator-navigation-first .mat-icon,
+mat-paginator ::ng-deep .mat-mdc-paginator-navigation-previous .mat-icon,
+mat-paginator ::ng-deep .mat-mdc-paginator-navigation-next .mat-icon,
+mat-paginator ::ng-deep .mat-mdc-paginator-navigation-last .mat-icon {
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
+}
+
+mat-paginator ::ng-deep .mat-mdc-form-field {
+  margin: 0 var(--spacing-2);
+}
+
+mat-paginator ::ng-deep .mdc-notched-outline__leading,
+mat-paginator ::ng-deep .mdc-notched-outline__notch,
+mat-paginator ::ng-deep .mdc-notched-outline__trailing {
+  border-color: var(--border-secondary) !important;
+}
+
+mat-paginator ::ng-deep .mat-mdc-form-field:hover .mdc-notched-outline__leading,
+mat-paginator ::ng-deep .mat-mdc-form-field:hover .mdc-notched-outline__notch,
+mat-paginator ::ng-deep .mat-mdc-form-field:hover .mdc-notched-outline__trailing {
+  border-color: var(--color-purple) !important;
+}
+
+/* ==========================================
+   RESPONSIVE STYLES
+   ========================================== */
+
+@media (max-width: 1400px) {
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .regions-table {
+    min-width: 1400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .regions-container {
+    padding: var(--spacing-4);
+  }
+
+  .header h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .filters-section {
+    padding: var(--spacing-4);
+  }
+
+  .filter-controls {
+    flex-direction: column;
+  }
+
+  .filter-controls mat-form-field {
+    width: 100%;
+  }
+
+  .reset-button {
+    width: 100%;
+  }
+
+  .regions-table td:first-child {
+    z-index: 1;
+  }
+
+  .regions-table th:first-child {
+    background: var(--bg-tertiary);
+    z-index: 3;
+  }
+}
+
+/* ==========================================
+   GO TO TOP BUTTON
+   ========================================== */
+
+.go-to-top-button {
+  position: fixed;
+  bottom: var(--spacing-8);
+  right: var(--spacing-8);
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-xl), var(--shadow-glow-purple);
+  transition: var(--transition-all);
+  z-index: var(--z-fixed);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+}
+
+.go-to-top-button.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.go-to-top-button:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: var(--shadow-2xl), var(--shadow-glow-purple);
+}
+
+.go-to-top-button:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.go-to-top-button .material-icons {
+  font-size: 28px;
+}
+
+/* Mobile adjustments for go to top button */
+@media (max-width: 768px) {
+  .go-to-top-button {
+    bottom: var(--spacing-6);
+    right: var(--spacing-6);
+    width: 48px;
+    height: 48px;
+  }
+  
+  .go-to-top-button .material-icons {
+    font-size: 24px;
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+   ========================================== */
+
+.mat-sort-header-button:focus {
+  outline: 2px solid var(--color-purple);
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-purple);
+  outline-offset: 2px;
+}

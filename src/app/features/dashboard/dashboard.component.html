@@ -1,0 +1,234 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>Analytics Dashboard</h1>
+    <p class="subtitle">Real-time insights and performance metrics</p>
+  </header>
+
+  <!-- Executive Summary Section -->
+  <section class="dashboard-section">
+    <h2>Executive Summary</h2>
+    
+    <div class="error-message" *ngIf="state.executiveSummary.error">
+      <p>{{ state.executiveSummary.error }}</p>
+      <button (click)="retryExecutiveSummary()">Retry</button>
+    </div>
+
+    <div class="metrics-grid" *ngIf="!state.executiveSummary.error">
+      <app-metric-card
+        title="Website Traffic"
+        [value]="state.executiveSummary.data?.['websiteTraffic'] ?? null"
+        icon="public"
+        format="number"
+        [loading]="state.executiveSummary.loading">
+      </app-metric-card>
+
+      <app-metric-card
+        title="Monthly Recurring Revenue"
+        [value]="state.executiveSummary.data?.['latestMrr'] ?? null"
+        [growth]="state.executiveSummary.data?.['growthPercentageMoM']"
+        [trend]="getTrend(state.executiveSummary.data?.['growthPercentageMoM'] || 0)"
+        icon="attach_money"
+        format="currency"
+        [loading]="state.executiveSummary.loading">
+      </app-metric-card>
+
+      <app-metric-card
+        title="Paid Conversions"
+        [value]="state.executiveSummary.data?.['paidConversions'] ?? null"
+        icon="shopping_cart"
+        format="number"
+        [loading]="state.executiveSummary.loading">
+      </app-metric-card>
+
+      <app-metric-card
+        title="Trial to Paid Rate"
+        [value]="state.executiveSummary.data?.['trialToPaidPercentage'] ?? null"
+        icon="trending_up"
+        format="percentage"
+        [loading]="state.executiveSummary.loading">
+      </app-metric-card>
+
+      <app-metric-card
+        title="Churn Rate"
+        [value]="state.executiveSummary.data?.['churnRate'] ?? null"
+        icon="trending_down"
+        format="percentage"
+        [alert]="(state.executiveSummary.data?.['churnRate'] || 0) > 5"
+        [loading]="state.executiveSummary.loading">
+      </app-metric-card>
+    </div>
+  </section>
+
+  <!-- Charts Section -->
+  <section class="dashboard-section">
+    <h2>Performance Trends</h2>
+    
+    <div class="charts-grid">
+      <!-- Website Traffic - FIRST (will be full width) -->
+      <div class="chart-card chart-traffic">
+        <div class="error-message" *ngIf="state.trafficTrends.error">
+          <p>{{ state.trafficTrends.error }}</p>
+          <button (click)="retryTrafficTrends()">Retry</button>
+        </div>
+        <app-line-chart
+          *ngIf="!state.trafficTrends.error"
+          [data]="state.trafficTrends.data || []"
+          title="Website Traffic Trends"
+          labelKey="label"
+          valueKey="value"
+          color="#22D3EE"
+          [loading]="state.trafficTrends.loading">
+        </app-line-chart>
+      </div>
+
+      <!-- MRR Growth - SECOND -->
+      <div class="chart-card chart-mrr">
+        <div class="error-message" *ngIf="state.mrrGrowth.error">
+          <p>{{ state.mrrGrowth.error }}</p>
+          <button (click)="retryMrrGrowth()">Retry</button>
+        </div>
+        <app-line-chart
+          *ngIf="!state.mrrGrowth.error"
+          [data]="state.mrrGrowth.data || []"
+          title="MRR Growth (Last 12 months)"
+          labelKey="label"
+          valueKey="value"
+          color="#10B981"
+          [loading]="state.mrrGrowth.loading">
+        </app-line-chart>
+      </div>
+
+      <!-- Conversion Funnel - THIRD -->
+      <div class="chart-card chart-funnel">
+        <div class="error-message" *ngIf="state.conversionFunnel.error">
+          <p>{{ state.conversionFunnel.error }}</p>
+          <button (click)="retryConversionFunnel()">Retry</button>
+        </div>
+        <app-funnel-chart
+          *ngIf="!state.conversionFunnel.error"
+          [data]="state.conversionFunnel.data || []"
+          title="Conversion Funnel"
+          [loading]="state.conversionFunnel.loading">
+        </app-funnel-chart>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data Tables Section -->
+  <section class="dashboard-section">
+    <h2>Detailed Metrics</h2>
+    
+    <div class="tables-grid">
+      <!-- Keywords Table -->
+      <div class="table-card">
+        <div class="error-message" *ngIf="state.keywords.error">
+          <p>{{ state.keywords.error }}</p>
+          <button (click)="retryKeywords()">Retry</button>
+        </div>
+        <app-data-table
+          *ngIf="!state.keywords.error"
+          [data]="state.keywords.data || []"
+          [columns]="keywordColumns"
+          title="Top Keywords"
+          [maxRows]="keywordMaxRows"
+          [loading]="state.keywords.loading">
+        </app-data-table>
+      </div>
+
+      <!-- Right Column Container -->
+      <div class="right-column">
+        <!-- Regions Table -->
+        <div class="table-card">
+          <div class="error-message" *ngIf="state.regions.error">
+            <p>{{ state.regions.error }}</p>
+            <button (click)="retryRegions()">Retry</button>
+          </div>
+          <app-data-table
+            *ngIf="!state.regions.error"
+            [data]="state.regions.data || []"
+            [columns]="regionColumns"
+            title="Regional Performance"
+            [maxRows]="10"
+            [loading]="state.regions.loading">
+          </app-data-table>
+        </div>
+
+        <!-- Channels Table -->
+        <div class="table-card">
+          <div class="error-message" *ngIf="state.channels.error">
+            <p>{{ state.channels.error }}</p>
+            <button (click)="retryChannels()">Retry</button>
+          </div>
+          <app-data-table
+            *ngIf="!state.channels.error"
+            [data]="state.channels.data || []"
+            [columns]="channelColumns"
+            title="Channel Performance"
+            [maxRows]="10"
+            [loading]="state.channels.loading">
+          </app-data-table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!-- Alerts Section -->
+<section class="dashboard-section">
+  <h2>Active Alerts</h2>
+
+  <div class="error-message" *ngIf="state.alerts.error">
+    <p>{{ state.alerts.error }}</p>
+    <button mat-button color="warn" (click)="retryAlerts()">Retry</button>
+  </div>
+
+  <div class="alerts-container" *ngIf="!state.alerts.error">
+    <div class="loading-message" *ngIf="state.alerts.loading">
+      <p>Loading alerts...</p>
+    </div>
+
+    <mat-tab-group [selectedIndex]="defaultTabIndex" class="alerts-tabs" *ngIf="!state.alerts.loading && state.alerts.data && state.alerts.data.length > 0">
+      <mat-tab *ngFor="let severity of severities" [label]="severity">
+        <ng-container *ngIf="alertsBySeverity[severity].length > 0; else noAlerts">
+          <!-- Show limited alerts based on showLimit -->
+          <app-alert-badge
+            *ngFor="let alert of alertsBySeverity[severity].slice(0, showLimit[severity])"
+            [alert]="alert">
+          </app-alert-badge>
+          
+          <!-- Show More button if there are more than 5 alerts and not all are shown -->
+          <div class="show-more-container" *ngIf="alertsBySeverity[severity].length > 5 && showLimit[severity] === 5">
+            <button mat-stroked-button color="primary" (click)="showMoreAlerts(severity)">
+              Show More ({{ alertsBySeverity[severity].length - 5 }} more)
+            </button>
+          </div>
+          
+          <!-- Show Less button if all alerts are shown -->
+          <div class="show-more-container" *ngIf="alertsBySeverity[severity].length > 5 && showLimit[severity] > 5">
+            <button mat-stroked-button color="primary" (click)="showLessAlerts(severity)">
+              Show Less
+            </button>
+          </div>
+        </ng-container>
+
+        <ng-template #noAlerts>
+          <p class="no-alerts-message">✅ No alerts of this severity.</p>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+
+    <div class="no-alerts" *ngIf="!state.alerts.loading && (!state.alerts.data || state.alerts.data.length === 0)">
+      <p>✅ No active alerts. All systems operating normally.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Go to Top Button -->
+<button
+  class="go-to-top-button"
+  [class.visible]="showGoToTop"
+  (click)="scrollToTop()"
+  aria-label="Go to top">
+  <span class="material-icons">arrow_upward</span>
+</button>
+
+</div>

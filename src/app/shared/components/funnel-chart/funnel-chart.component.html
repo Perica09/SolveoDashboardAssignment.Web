@@ -1,0 +1,25 @@
+<div class="funnel-container">
+  <h3>{{ title }}</h3>
+  
+ <div class="funnel-stages" *ngIf="!loading && data.length > 0">
+  <div *ngFor="let stage of data; let i = index" class="funnel-stage">
+    <div class="stage-bar" 
+         [style.width.%]="getWidth(stage.value)"
+         [style.background-color]="getColor(i)">
+      <div class="stage-content">
+        <span class="stage-name">{{ stage.stage }}</span>
+        <span class="stage-value">
+          {{ stage.value | number }} ({{ stage.percentage | number:'1.1-1' }}%)
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+  <div class="skeleton" *ngIf="loading"></div>
+  
+  <div class="no-data" *ngIf="!loading && data.length === 0">
+    <p>No funnel data available</p>
+  </div>
+</div>
